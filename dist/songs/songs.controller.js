@@ -25,6 +25,7 @@ exports.SongsController = void 0;
 const common_1 = require("@nestjs/common");
 const songs_service_1 = require("./songs.service");
 const create_song_dto_1 = require("./entities/create-song.dto");
+const update_song_dto_1 = require("./entities/update-song.dto");
 let SongsController = class SongsController {
     constructor(songService) {
         this.songService = songService;
@@ -37,6 +38,16 @@ let SongsController = class SongsController {
     create(createSongDTO) {
         return __awaiter(this, void 0, void 0, function* () {
             return this.songService.create(createSongDTO);
+        });
+    }
+    update(id, updateSongDTO) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.songService.update(+id, updateSongDTO);
+        });
+    }
+    delete(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            this.songService.delete(+id);
         });
     }
 };
@@ -54,6 +65,21 @@ __decorate([
     __metadata("design:paramtypes", [create_song_dto_1.CreateSongDTO]),
     __metadata("design:returntype", Promise)
 ], SongsController.prototype, "create", null);
+__decorate([
+    (0, common_1.Patch)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, update_song_dto_1.UpdateSongDTO]),
+    __metadata("design:returntype", Promise)
+], SongsController.prototype, "update", null);
+__decorate([
+    (0, common_1.Delete)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], SongsController.prototype, "delete", null);
 exports.SongsController = SongsController = __decorate([
     (0, common_1.Controller)('songs'),
     __metadata("design:paramtypes", [songs_service_1.SongsService])

@@ -41,6 +41,25 @@ let SongsService = class SongsService {
             return this.songRepository.save(newSong);
         });
     }
+    update(id, updateSongDTO) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const song = yield this.songRepository.findOne({ where: { id } });
+            if (!song) {
+                throw new common_1.NotFoundException(`Song with id ${id} not found`);
+            }
+            yield this.songRepository.update(id, updateSongDTO);
+            const updatedSong = yield this.songRepository.findOne({ where: { id } });
+            if (!updatedSong) {
+                throw new common_1.NotFoundException(`Updated song with id ${id} not found`);
+            }
+            return updatedSong;
+        });
+    }
+    delete(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this.songRepository.delete(id);
+        });
+    }
 };
 exports.SongsService = SongsService;
 exports.SongsService = SongsService = __decorate([

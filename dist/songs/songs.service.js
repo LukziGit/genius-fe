@@ -35,6 +35,12 @@ let SongsService = class SongsService {
             return this.songRepository.find();
         });
     }
+    create(createSongDTO) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const newSong = this.songRepository.create(createSongDTO);
+            return this.songRepository.save(newSong);
+        });
+    }
 };
 exports.SongsService = SongsService;
 exports.SongsService = SongsService = __decorate([

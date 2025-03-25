@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Genre = void 0;
 const typeorm_1 = require("typeorm");
+const song_1 = require("../../songs/entities/song");
 let Genre = class Genre {
 };
 exports.Genre = Genre;
@@ -22,6 +23,10 @@ __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], Genre.prototype, "name", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => song_1.Song, (song) => song.genre),
+    __metadata("design:type", Array)
+], Genre.prototype, "songs", void 0);
 exports.Genre = Genre = __decorate([
     (0, typeorm_1.Entity)('genres')
 ], Genre);

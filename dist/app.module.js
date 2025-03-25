@@ -11,6 +11,8 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const songs_module_1 = require("./songs/songs.module");
 const song_1 = require("./songs/entities/song");
+const genre_1 = require("./genres/entities/genre");
+const genres_module_1 = require("./genres/genres.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -24,10 +26,11 @@ exports.AppModule = AppModule = __decorate([
                 username: 'postgres', // Tvoj username
                 password: 'fE272%sT', // Tvoje geslo
                 database: 'genius', // Ime baze
-                entities: [song_1.Song],
+                entities: [song_1.Song, genre_1.Genre],
                 synchronize: true, // Samodejna migracija
             }),
             songs_module_1.SongsModule,
+            genres_module_1.GenresModule,
         ],
     })
 ], AppModule);

@@ -16,10 +16,9 @@ function bootstrap() {
     return __awaiter(this, void 0, void 0, function* () {
         var _a;
         const app = yield core_1.NestFactory.create(app_module_1.AppModule);
-        app.useGlobalPipes(new common_1.ValidationPipe()); //Za validacijo da napiše če je kej narobe pri POST
+        app.useGlobalPipes(new common_1.ValidationPipe({ whitelist: true, forbidNonWhitelisted: false, transform: true })); //Za validacijo da napiše če je kej narobe pri POST
         app.enableCors();
         yield app.listen((_a = process.env.PORT) !== null && _a !== void 0 ? _a : 3000);
     });
 }
 bootstrap();
-1;

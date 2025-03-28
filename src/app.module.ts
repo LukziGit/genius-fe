@@ -10,6 +10,8 @@ import {Artist} from "./artists/entities/artist";
 import { UsersController } from './users/users.controller';
 import { UsersModule } from './users/users.module';
 import {User} from "./users/entities/user.entity";
+import { AuthService } from './auth/auth.service';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
     imports: [
@@ -27,7 +29,9 @@ import {User} from "./users/entities/user.entity";
         GenresModule,
         ArtistsModule,
         UsersModule,
+        AuthModule,
     ],
+    providers: [AuthService],
 
 })
 export class AppModule {}

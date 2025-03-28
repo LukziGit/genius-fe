@@ -13,6 +13,7 @@ exports.Song = void 0;
 const typeorm_1 = require("typeorm");
 const genre_1 = require("../../genres/entities/genre");
 const artist_1 = require("../../artists/entities/artist");
+const user_entity_1 = require("../../users/entities/user.entity");
 let Song = class Song {
 };
 exports.Song = Song;
@@ -54,6 +55,15 @@ __decorate([
     (0, typeorm_1.JoinColumn)({ name: 'artist_id' }),
     __metadata("design:type", artist_1.Artist)
 ], Song.prototype, "artist", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ name: 'user_id' }),
+    __metadata("design:type", Number)
+], Song.prototype, "userId", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => user_entity_1.User, (user) => user.songs, { nullable: false }),
+    (0, typeorm_1.JoinColumn)({ name: 'user_id' }),
+    __metadata("design:type", user_entity_1.User)
+], Song.prototype, "user", void 0);
 exports.Song = Song = __decorate([
     (0, typeorm_1.Entity)('songs')
 ], Song);

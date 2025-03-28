@@ -1,5 +1,6 @@
-import {BeforeInsert, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {BeforeInsert, Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import * as bcrypt from 'bcrypt';
+import {Song} from "../../songs/entities/song";
 
 
 @Entity('users')
@@ -16,6 +17,11 @@ export class User {
     lastName!: string;
     @CreateDateColumn()
     createdAt!: Date;
+
+
+    @OneToMany(() => Song, (song) => song.user)
+    songs?: Song[];
+
 
     @BeforeInsert()
     hasPassword = async (): Promise<void> => {

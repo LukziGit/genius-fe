@@ -8,6 +8,7 @@ import {
 } from 'typeorm';
 import {Genre} from "../../genres/entities/genre";
 import {Artist} from "../../artists/entities/artist";
+import {User} from "../../users/entities/user.entity";
 
 
 @Entity('songs')
@@ -51,4 +52,9 @@ export class Song {
     "artistId": 5
 }
      */
+    @Column({ name: 'user_id' })
+    userId!: number;
+    @ManyToOne(() => User, (user) => user.songs, {nullable: false    })
+    @JoinColumn({ name: 'user_id' })
+    user!: User;
 }

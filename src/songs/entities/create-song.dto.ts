@@ -17,4 +17,7 @@ export class CreateSongDTO {
 
     @IsNumber()
     artistId!: number;
+
+    @IsNumber()
+    userId!: number;
 }

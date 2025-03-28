@@ -7,6 +7,9 @@ import { GenresModule } from './genres/genres.module';
 import { ArtistsService } from './artists/artists.service';
 import { ArtistsModule } from './artists/artists.module';
 import {Artist} from "./artists/entities/artist";
+import { UsersController } from './users/users.controller';
+import { UsersModule } from './users/users.module';
+import {User} from "./users/entities/user.entity";
 
 @Module({
     imports: [
@@ -17,12 +20,13 @@ import {Artist} from "./artists/entities/artist";
             username: 'postgres', // Tvoj username
             password: 'fE272%sT', // Tvoje geslo
             database: 'genius', // Ime baze
-            entities: [Song,Genre,Artist],
+            entities: [Song,Genre,Artist, User],
             synchronize: true, // Samodejna migracija
         }),
         SongsModule,
         GenresModule,
         ArtistsModule,
+        UsersModule,
     ],
 
 })

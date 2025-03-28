@@ -15,6 +15,8 @@ const genre_1 = require("./genres/entities/genre");
 const genres_module_1 = require("./genres/genres.module");
 const artists_module_1 = require("./artists/artists.module");
 const artist_1 = require("./artists/entities/artist");
+const users_module_1 = require("./users/users.module");
+const user_entity_1 = require("./users/entities/user.entity");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -28,12 +30,13 @@ exports.AppModule = AppModule = __decorate([
                 username: 'postgres', // Tvoj username
                 password: 'fE272%sT', // Tvoje geslo
                 database: 'genius', // Ime baze
-                entities: [song_1.Song, genre_1.Genre, artist_1.Artist],
+                entities: [song_1.Song, genre_1.Genre, artist_1.Artist, user_entity_1.User],
                 synchronize: true, // Samodejna migracija
             }),
             songs_module_1.SongsModule,
             genres_module_1.GenresModule,
             artists_module_1.ArtistsModule,
+            users_module_1.UsersModule,
         ],
     })
 ], AppModule);

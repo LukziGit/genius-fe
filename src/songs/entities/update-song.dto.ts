@@ -13,4 +13,7 @@ export class UpdateSongDTO {
     @IsOptional()
     @IsNumber()
     genre_Id?: number;
+    @IsOptional()
+    @IsNumber()
+    artist_Id?: number;
 }

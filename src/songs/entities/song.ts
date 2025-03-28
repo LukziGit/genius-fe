@@ -7,6 +7,7 @@ import {
     JoinColumn
 } from 'typeorm';
 import {Genre} from "../../genres/entities/genre";
+import {Artist} from "../../artists/entities/artist";
 
 
 @Entity('songs')
@@ -33,6 +34,21 @@ export class Song {
   "lyrics": "You better lose yourself in the music, the moment...",
   "releaseDate": "2002-10-28",
   "genreId":2
+}
+     */
+    @Column({ name: 'artist_id' })
+    artistId!: number;
+    @ManyToOne(() => Artist, (artist) => artist.songs, {nullable: false    })
+    @JoinColumn({ name: 'artist_id' })
+    artist!: Artist;
+
+    /*
+    {
+  "title": "Lose Yourself",
+  "lyrics": "You better lose yourself in the music, the moment...",
+  "releaseDate": "2002-10-28",
+  "genreId":2,
+    "artistId": 5
 }
      */
 }

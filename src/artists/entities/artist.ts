@@ -21,4 +21,6 @@ export class Artist {
     @CreateDateColumn()
     createdAt!: Date;
 
+    @OneToMany(() => Song, (song) => song.artist)
+    songs?: Song[];
 }

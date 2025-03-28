@@ -37,6 +37,7 @@ let SongsController = class SongsController {
     }
     create(createSongDTO) {
         return __awaiter(this, void 0, void 0, function* () {
+            console.log('test');
             return this.songService.create(createSongDTO);
         });
     }

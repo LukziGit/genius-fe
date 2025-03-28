@@ -9,5 +9,5 @@ export class Genre {
     @Column()
     name!: string;
     @OneToMany(() => Song, (song) => song.genre)
-    songs!: Song[];
+    songs?: Song[];
 }

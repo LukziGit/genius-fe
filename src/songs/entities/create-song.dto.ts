@@ -1,4 +1,6 @@
-import { IsDateString, IsString } from 'class-validator';
+import {IsDateString, IsNumber, IsOptional, IsString} from 'class-validator';
+import {Type} from "class-transformer";
+import {CreateDateColumn} from "typeorm";
 
 export class CreateSongDTO {
     @IsString()
@@ -8,5 +10,8 @@ export class CreateSongDTO {
     lyrics!: string;
 
     @IsDateString()
-    releaseDate?: string;
+    releaseDate!: string;
+
+    @IsNumber()
+    genreId!: number;
 }

@@ -23,7 +23,6 @@ import {Artist} from "./artists/entities/artist";
         SongsModule,
         GenresModule,
         ArtistsModule,
-
     ],
 
 })

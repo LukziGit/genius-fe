@@ -15,6 +15,7 @@ export class SongsService {
         return this.songRepository.find();
     }
     async create(createSongDTO: CreateSongDTO): Promise<Song> {
+        //console.log(createSongDTO);
         const newSong = this.songRepository.create(createSongDTO);
         return this.songRepository.save(newSong);
     }

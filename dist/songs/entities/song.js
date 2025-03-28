@@ -36,6 +36,10 @@ __decorate([
     __metadata("design:type", Date)
 ], Song.prototype, "createdAt", void 0);
 __decorate([
+    (0, typeorm_1.Column)({ name: 'genre_id' }),
+    __metadata("design:type", Number)
+], Song.prototype, "genreId", void 0);
+__decorate([
     (0, typeorm_1.ManyToOne)(() => genre_1.Genre, (genre) => genre.songs, { nullable: false }),
     (0, typeorm_1.JoinColumn)({ name: 'genre_id' }),
     __metadata("design:type", genre_1.Genre)

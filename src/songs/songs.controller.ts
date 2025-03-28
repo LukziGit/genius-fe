@@ -14,6 +14,7 @@ export class SongsController {
     }
     @Post()
     async create(@Body() createSongDTO: CreateSongDTO): Promise<Song> {
+        console.log('test');
         return this.songService.create(createSongDTO);
     }
     @Patch(':id')

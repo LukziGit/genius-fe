@@ -37,6 +37,7 @@ let SongsService = class SongsService {
     }
     create(createSongDTO) {
         return __awaiter(this, void 0, void 0, function* () {
+            //console.log(createSongDTO);
             const newSong = this.songRepository.create(createSongDTO);
             return this.songRepository.save(newSong);
         });

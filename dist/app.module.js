@@ -17,7 +17,6 @@ const artists_module_1 = require("./artists/artists.module");
 const artist_1 = require("./artists/entities/artist");
 const users_module_1 = require("./users/users.module");
 const user_entity_1 = require("./users/entities/user.entity");
-const auth_service_1 = require("./auth/auth.service");
 const auth_module_1 = require("./auth/auth.module");
 let AppModule = class AppModule {
 };
@@ -41,6 +40,5 @@ exports.AppModule = AppModule = __decorate([
             users_module_1.UsersModule,
             auth_module_1.AuthModule,
         ],
-        providers: [auth_service_1.AuthService],
     })
 ], AppModule);

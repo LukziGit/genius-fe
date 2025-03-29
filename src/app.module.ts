@@ -12,16 +12,19 @@ import { UsersModule } from './users/users.module';
 import {User} from "./users/entities/user.entity";
 import { AuthService } from './auth/auth.service';
 import { AuthModule } from './auth/auth.module';
+import {ConfigModule} from "@nestjs/config";
+import process from "node:process";
 
 @Module({
     imports: [
+        ConfigModule.forRoot({isGlobal: true}),
         TypeOrmModule.forRoot({
             type: 'postgres',
-            host: 'localhost',
-            port: 5432,
-            username: 'postgres', // Tvoj username
-            password: 'fE272%sT', // Tvoje geslo
-            database: 'genius', // Ime baze
+            host: process.env.DATABASE_HOST,
+            port: Number(process.env.DATABASE_PORT || 5432),
+            username: process.env.DATABASE_USER,
+            password: process.env.DATABASE_PASSWORD,
+            database: process.env.DATABASE_NAME,
             entities: [Song,Genre,Artist, User],
             synchronize: true, // Samodejna migracija
         }),
@@ -31,7 +34,6 @@ import { AuthModule } from './auth/auth.module';
         UsersModule,
         AuthModule,
     ],
-
 
 })
 export class AppModule {}

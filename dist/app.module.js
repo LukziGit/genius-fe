@@ -5,6 +5,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
@@ -18,19 +21,22 @@ const artist_1 = require("./artists/entities/artist");
 const users_module_1 = require("./users/users.module");
 const user_entity_1 = require("./users/entities/user.entity");
 const auth_module_1 = require("./auth/auth.module");
+const config_1 = require("@nestjs/config");
+const node_process_1 = __importDefault(require("node:process"));
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
+            config_1.ConfigModule.forRoot({ isGlobal: true }),
             typeorm_1.TypeOrmModule.forRoot({
                 type: 'postgres',
-                host: 'localhost',
-                port: 5432,
-                username: 'postgres', // Tvoj username
-                password: 'fE272%sT', // Tvoje geslo
-                database: 'genius', // Ime baze
+                host: node_process_1.default.env.DATABASE_HOST,
+                port: Number(node_process_1.default.env.DATABASE_PORT || 5432),
+                username: node_process_1.default.env.DATABASE_USER,
+                password: node_process_1.default.env.DATABASE_PASSWORD,
+                database: node_process_1.default.env.DATABASE_NAME,
                 entities: [song_1.Song, genre_1.Genre, artist_1.Artist, user_entity_1.User],
                 synchronize: true, // Samodejna migracija
             }),

@@ -26,6 +26,8 @@ const common_1 = require("@nestjs/common");
 const songs_service_1 = require("./songs.service");
 const create_song_dto_1 = require("./entities/create-song.dto");
 const update_song_dto_1 = require("./entities/update-song.dto");
+const jwt_auth_guard_1 = require("../auth/jwt-auth.guard");
+const common_2 = require("@nestjs/common");
 let SongsController = class SongsController {
     constructor(songService) {
         this.songService = songService;
@@ -35,10 +37,14 @@ let SongsController = class SongsController {
             return this.songService.findAll();
         });
     }
-    create(createSongDTO) {
+    findOne(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log('test');
-            return this.songService.create(createSongDTO);
+            return this.songService.findOne(+id);
+        });
+    }
+    create(createSongDTO, req) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.songService.create(createSongDTO, req.user.userId);
         });
     }
     update(id, updateSongDTO) {
@@ -60,10 +66,18 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], SongsController.prototype, "findAll", null);
 __decorate([
+    (0, common_1.Get)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], SongsController.prototype, "findOne", null);
+__decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_2.Req)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_song_dto_1.CreateSongDTO]),
+    __metadata("design:paramtypes", [create_song_dto_1.CreateSongDTO, Object]),
     __metadata("design:returntype", Promise)
 ], SongsController.prototype, "create", null);
 __decorate([
@@ -83,5 +97,6 @@ __decorate([
 ], SongsController.prototype, "delete", null);
 exports.SongsController = SongsController = __decorate([
     (0, common_1.Controller)('songs'),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     __metadata("design:paramtypes", [songs_service_1.SongsService])
 ], SongsController);

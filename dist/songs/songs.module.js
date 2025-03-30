@@ -12,12 +12,13 @@ const songs_controller_1 = require("./songs.controller");
 const songs_service_1 = require("./songs.service");
 const typeorm_1 = require("@nestjs/typeorm");
 const song_1 = require("./entities/song");
+const users_module_1 = require("../users/users.module");
 let SongsModule = class SongsModule {
 };
 exports.SongsModule = SongsModule;
 exports.SongsModule = SongsModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([song_1.Song])],
+        imports: [typeorm_1.TypeOrmModule.forFeature([song_1.Song]), users_module_1.UsersModule],
         controllers: [songs_controller_1.SongsController],
         providers: [songs_service_1.SongsService],
     })

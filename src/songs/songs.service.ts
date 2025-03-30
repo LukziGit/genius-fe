@@ -4,19 +4,30 @@ import {Song} from "./entities/song";
 import {Repository} from "typeorm";
 import {CreateSongDTO} from "./entities/create-song.dto";
 import {UpdateSongDTO} from "./entities/update-song.dto";
+import {UsersService} from "../users/users.service";
+import {User} from "../users/entities/user.entity";
 
 @Injectable()
 export class SongsService {
     constructor(
         @InjectRepository(Song)
         private readonly songRepository: Repository<Song>,
+        private readonly userService: UsersService,
     ) {}
     async findAll(): Promise<Song[]> {
         return this.songRepository.find();
     }
-    async create(createSongDTO: CreateSongDTO): Promise<Song> {
-        //console.log(createSongDTO);
-        const newSong = this.songRepository.create(createSongDTO);
+    async findOne(id:number): Promise<Song | null> {
+
+        return await this.songRepository.findOne({where: {id}})
+    }
+    async create(createSongDTO: CreateSongDTO, userId: number): Promise<Song> {
+
+        const user = await this.userService.findById(userId) // user glede na ID
+        if (!user) { // prever ce je user null
+            throw new NotFoundException(`User with ID ${userId} not found`);
+        }
+        const newSong = this.songRepository.create({ ...createSongDTO, user});
         return this.songRepository.save(newSong);
     }
     async update(id: number, updateSongDTO: UpdateSongDTO): Promise<Song> {

@@ -32,7 +32,7 @@ exports.AppModule = AppModule = __decorate([
             config_1.ConfigModule.forRoot({ isGlobal: true }),
             typeorm_1.TypeOrmModule.forRoot({
                 type: 'postgres',
-                host: node_process_1.default.env.DATABASE_HOST,
+                host: node_process_1.default.env.DATABASE_HOST || 'localhost',
                 port: Number(node_process_1.default.env.DATABASE_PORT || 5432),
                 username: node_process_1.default.env.DATABASE_USER,
                 password: node_process_1.default.env.DATABASE_PASSWORD,

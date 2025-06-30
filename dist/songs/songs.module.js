@@ -13,6 +13,7 @@ const songs_service_1 = require("./songs.service");
 const typeorm_1 = require("@nestjs/typeorm");
 const song_1 = require("./entities/song");
 const users_module_1 = require("../users/users.module");
+//Namenjen organizira celotno funckonalnost aplikacije v samostojni modul - kontrolerje, povezave z bazo(TypeOrm...)
 let SongsModule = class SongsModule {
 };
 exports.SongsModule = SongsModule;

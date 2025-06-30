@@ -14,7 +14,11 @@ import { AuthService } from './auth/auth.service';
 import { AuthModule } from './auth/auth.module';
 import {ConfigModule} from "@nestjs/config";
 import process from "node:process";
+import {AppController} from "./app.controller";
+import {AppService} from "./app.service";
 
+//je root modul aplikacije. Tuki notr se konfigurirajo stvari za bazo
+//configmodule bere iz .env datoteke
 @Module({
     imports: [
         ConfigModule.forRoot({isGlobal: true}),
@@ -34,6 +38,8 @@ import process from "node:process";
         UsersModule,
         AuthModule,
     ],
+    controllers: [AppController],
+    providers: [AppService],
 
 })
 export class AppModule {}

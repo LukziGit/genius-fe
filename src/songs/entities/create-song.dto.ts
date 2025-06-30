@@ -11,13 +11,17 @@ export class CreateSongDTO {
 
     @IsDateString()
     releaseDate!: string;
-
+    @Type(() => Number)
     @IsNumber()
     genreId!: number;
-
+    @Type(() => Number)
     @IsNumber()
     artistId!: number;
 
-    @IsNumber()
-    userId!: number;
+    /*
+       @IsNumber()
+       userId!: number;
+     */
+
+
 }

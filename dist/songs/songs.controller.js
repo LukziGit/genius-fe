@@ -28,6 +28,10 @@ const create_song_dto_1 = require("./entities/create-song.dto");
 const update_song_dto_1 = require("./entities/update-song.dto");
 const jwt_auth_guard_1 = require("../auth/jwt-auth.guard");
 const common_2 = require("@nestjs/common");
+const platform_express_1 = require("@nestjs/platform-express");
+const multer_1 = require("multer");
+const path_1 = require("path");
+//Sprejema in obravnava HTTP requeste
 let SongsController = class SongsController {
     constructor(songService) {
         this.songService = songService;
@@ -42,14 +46,20 @@ let SongsController = class SongsController {
             return this.songService.findOne(+id);
         });
     }
-    create(createSongDTO, req) {
+    create(createSongDTO, req, file) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.songService.create(createSongDTO, req.user.userId);
+            console.log("req.user:", req.user);
+            const imagePath = file ? `/uploads/covers/${file.filename}` : undefined;
+            return this.songService.create(createSongDTO, req.user.userId, imagePath);
         });
     }
-    update(id, updateSongDTO) {
+    update(id, updateSongDTO, req, cover
+    /*------*/
+    ) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.songService.update(+id, updateSongDTO);
+            /* Tukaj je tudi testni del req.user['userId*/
+            const imagePath = cover ? `/uploads/covers/${cover.filename}` : undefined;
+            return this.songService.update(+id, updateSongDTO, req.user['userId'], imagePath);
         });
     }
     delete(id) {
@@ -74,18 +84,42 @@ __decorate([
 ], SongsController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Post)(),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('cover', {
+        // dest: './uploads/covers', // kam se shrani slika
+        storage: (0, multer_1.diskStorage)({
+            destination: './uploads/covers',
+            filename: (req, file, cb) => {
+                const uniqueName = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
+                const extension = (0, path_1.extname)(file.originalname); // doda .png / .jpg
+                cb(null, uniqueName + extension);
+            },
+        })
+    })),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, common_2.Req)()),
+    __param(2, (0, common_1.UploadedFile)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_song_dto_1.CreateSongDTO, Object]),
+    __metadata("design:paramtypes", [create_song_dto_1.CreateSongDTO, Object, Object]),
     __metadata("design:returntype", Promise)
 ], SongsController.prototype, "create", null);
 __decorate([
     (0, common_1.Patch)(':id'),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('cover', {
+        storage: (0, multer_1.diskStorage)({
+            destination: './uploads/covers', //Kam se datoteka shrani
+            filename: (req, file, cb) => {
+                const uniqueName = `${Date.now()}-${Math.round(Math.random() * 1e9)}`; // ime datoteke
+                const extension = (0, path_1.extname)(file.originalname); //Ustvari naključno, časovno osnovano ime, npr. 1749384804854-123456789
+                cb(null, uniqueName + extension); // doda priponko kot png...
+            },
+        })
+    })),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
+    __param(2, (0, common_2.Req)()),
+    __param(3, (0, common_1.UploadedFile)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, update_song_dto_1.UpdateSongDTO]),
+    __metadata("design:paramtypes", [String, update_song_dto_1.UpdateSongDTO, Object, Object]),
     __metadata("design:returntype", Promise)
 ], SongsController.prototype, "update", null);
 __decorate([

@@ -16,7 +16,13 @@ export class UpdateSongDTO {
     @IsOptional()
     @IsNumber()
     artist_Id?: number;
+    /*
     @IsOptional()
     @IsNumber()
     user_Id?: number;
+
+     */
+    @IsOptional()
+    @IsString()
+    coverImagePath?: string;
 }

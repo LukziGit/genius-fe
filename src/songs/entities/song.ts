@@ -57,4 +57,10 @@ export class Song {
     @ManyToOne(() => User, (user) => user.songs, {nullable: false    })
     @JoinColumn({ name: 'user_id' })
     user!: User;
+
+
+    //File Upload
+
+    @Column({nullable: true})
+    coverImagePath?: string;
 }

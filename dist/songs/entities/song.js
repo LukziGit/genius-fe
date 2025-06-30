@@ -64,6 +64,10 @@ __decorate([
     (0, typeorm_1.JoinColumn)({ name: 'user_id' }),
     __metadata("design:type", user_entity_1.User)
 ], Song.prototype, "user", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", String)
+], Song.prototype, "coverImagePath", void 0);
 exports.Song = Song = __decorate([
     (0, typeorm_1.Entity)('songs')
 ], Song);
